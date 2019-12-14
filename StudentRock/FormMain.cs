@@ -14,6 +14,7 @@ namespace StudentRock
         public FormMain()
         {
             InitializeComponent();
+            applySettings();
         }
 
         private void applySettings()
@@ -72,7 +73,7 @@ namespace StudentRock
             applySettings();
         }
 
-        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
             if (this.Visible)
             {

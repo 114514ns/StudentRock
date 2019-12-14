@@ -142,6 +142,8 @@
             // c_noTopMostWindow
             // 
             this.c_noTopMostWindow.AutoSize = true;
+            this.c_noTopMostWindow.Checked = true;
+            this.c_noTopMostWindow.CheckState = System.Windows.Forms.CheckState.Checked;
             this.c_noTopMostWindow.Location = new System.Drawing.Point(126, 20);
             this.c_noTopMostWindow.Name = "c_noTopMostWindow";
             this.c_noTopMostWindow.Size = new System.Drawing.Size(60, 16);
@@ -172,6 +174,8 @@
             // c_unhookKeyboard
             // 
             this.c_unhookKeyboard.AutoSize = true;
+            this.c_unhookKeyboard.Checked = true;
+            this.c_unhookKeyboard.CheckState = System.Windows.Forms.CheckState.Checked;
             this.c_unhookKeyboard.Location = new System.Drawing.Point(6, 43);
             this.c_unhookKeyboard.Name = "c_unhookKeyboard";
             this.c_unhookKeyboard.Size = new System.Drawing.Size(72, 16);
@@ -223,14 +227,14 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(70, 14);
             this.labelVersion.TabIndex = 11;
-            this.labelVersion.Text = "α Build 1";
+            this.labelVersion.Text = "α Build 2";
             // 
             // notifyIcon
             // 
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "notifyIcon";
+            this.notifyIcon.Text = "StudentRock";
             this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
             // FormMain
             // 
