@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.textBoxStMainPID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxStMainPath = new System.Windows.Forms.TextBox();
@@ -42,13 +41,13 @@
             this.c_showConsole = new System.Windows.Forms.CheckBox();
             this.c_noTopMostWindow = new System.Windows.Forms.CheckBox();
             this.c_exitStMain = new System.Windows.Forms.CheckBox();
-            this.buttonConfirm = new System.Windows.Forms.Button();
             this.c_enableTerminate = new System.Windows.Forms.CheckBox();
             this.c_unhookKeyboard = new System.Windows.Forms.CheckBox();
             this.c_fakeScreenshot = new System.Windows.Forms.CheckBox();
             this.buttonStart = new System.Windows.Forms.Button();
             this.coreConfig = new System.Windows.Forms.GroupBox();
             this.labelVersion = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.groupBoxStatus.SuspendLayout();
             this.coreConfig.SuspendLayout();
             this.SuspendLayout();
@@ -145,9 +144,9 @@
             this.c_noTopMostWindow.AutoSize = true;
             this.c_noTopMostWindow.Location = new System.Drawing.Point(126, 20);
             this.c_noTopMostWindow.Name = "c_noTopMostWindow";
-            this.c_noTopMostWindow.Size = new System.Drawing.Size(96, 16);
+            this.c_noTopMostWindow.Size = new System.Drawing.Size(60, 16);
             this.c_noTopMostWindow.TabIndex = 4;
-            this.c_noTopMostWindow.Text = "禁止全屏窗口";
+            this.c_noTopMostWindow.Text = "窗口化";
             this.c_noTopMostWindow.UseVisualStyleBackColor = true;
             // 
             // c_exitStMain
@@ -159,16 +158,6 @@
             this.c_exitStMain.TabIndex = 3;
             this.c_exitStMain.Text = "阻止学生端启动";
             this.c_exitStMain.UseVisualStyleBackColor = true;
-            // 
-            // buttonConfirm
-            // 
-            this.buttonConfirm.Location = new System.Drawing.Point(147, 82);
-            this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(75, 23);
-            this.buttonConfirm.TabIndex = 1;
-            this.buttonConfirm.Text = "应用设定";
-            this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Click += new System.EventHandler(this.ButtonConfirm_Click);
             // 
             // c_enableTerminate
             // 
@@ -215,7 +204,6 @@
             this.coreConfig.Controls.Add(this.c_showConsole);
             this.coreConfig.Controls.Add(this.c_noTopMostWindow);
             this.coreConfig.Controls.Add(this.c_exitStMain);
-            this.coreConfig.Controls.Add(this.buttonConfirm);
             this.coreConfig.Controls.Add(this.c_enableTerminate);
             this.coreConfig.Controls.Add(this.c_unhookKeyboard);
             this.coreConfig.Controls.Add(this.c_fakeScreenshot);
@@ -236,6 +224,13 @@
             this.labelVersion.Size = new System.Drawing.Size(70, 14);
             this.labelVersion.TabIndex = 11;
             this.labelVersion.Text = "α Build 1";
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
             // FormMain
             // 
@@ -260,8 +255,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TextBox textBoxStMainPID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxStMainPath;
@@ -273,13 +266,13 @@
         private System.Windows.Forms.CheckBox c_showConsole;
         private System.Windows.Forms.CheckBox c_noTopMostWindow;
         private System.Windows.Forms.CheckBox c_exitStMain;
-        private System.Windows.Forms.Button buttonConfirm;
         private System.Windows.Forms.CheckBox c_enableTerminate;
         private System.Windows.Forms.CheckBox c_unhookKeyboard;
         private System.Windows.Forms.CheckBox c_fakeScreenshot;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.GroupBox coreConfig;
         private System.Windows.Forms.Label labelVersion;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 

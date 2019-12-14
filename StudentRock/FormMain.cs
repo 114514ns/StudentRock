@@ -16,21 +16,7 @@ namespace StudentRock
             InitializeComponent();
         }
 
-        private void CheckBoxIsConnected_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxIsConnected.Checked)
-            {
-                checkBoxIsConnected.ForeColor = Color.Green;
-                checkBoxIsConnected.Text = "已经与学生端建立了神经连接";
-            }
-            else
-            {
-                checkBoxIsConnected.ForeColor = Color.Red;
-                checkBoxIsConnected.Text = "与学生端的连接已断开";
-            }
-        }
-
-        private void ButtonConfirm_Click(object sender, EventArgs e)
+        private void applySettings()
         {
             if (c_enableTerminate.Checked) LibStHook.SetEnableTerminate(1);
             else LibStHook.SetEnableTerminate(0);
@@ -51,6 +37,20 @@ namespace StudentRock
             else LibStHook.SetShowConsole(0);
         }
 
+        private void CheckBoxIsConnected_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxIsConnected.Checked)
+            {
+                checkBoxIsConnected.ForeColor = Color.Green;
+                checkBoxIsConnected.Text = "已经与学生端建立了神经连接";
+            }
+            else
+            {
+                checkBoxIsConnected.ForeColor = Color.Red;
+                checkBoxIsConnected.Text = "与学生端的连接已断开";
+            }
+        }
+
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             LibStHook.SetGlobalHook();
@@ -68,6 +68,19 @@ namespace StudentRock
 
             if (LibStHook.IsAlive() != 0) checkBoxIsConnected.Checked = true;
             else checkBoxIsConnected.Checked = false;
+
+            applySettings();
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (this.Visible)
+            {
+                this.Hide();
+            } else
+            {
+                this.Show();
+            }
         }
     }
 }
