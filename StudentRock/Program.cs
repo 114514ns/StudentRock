@@ -26,6 +26,7 @@ namespace StudentRock
             }
             Updater.CheckUpdateSimple("http://f.17zuonie.org/StudentRock/{0}", "update_c.xml");
             Application.Run(new FormMain());
+            LibStHook.UnsetGlobalHook();
         }
 
         static bool CheckDepFiles()
@@ -50,9 +51,6 @@ namespace StudentRock
         public static extern void SetExitStMain(int x);
 
         [DllImport("LibStHook.dll")]
-        public static extern void SetFakeScreenshot(int x);
-
-        [DllImport("LibStHook.dll")]
         public static extern void SetNoTopMostWindow(int x);
 
         [DllImport("LibStHook.dll")]
@@ -65,12 +63,9 @@ namespace StudentRock
         public static extern int UnsetGlobalHook();
 
         [DllImport("LibStHook.dll")]
-        public static extern String GetStMainPath();
-
-        [DllImport("LibStHook.dll")]
-        public static extern uint GetStMainId();
-
-        [DllImport("LibStHook.dll")]
         public static extern int IsAlive();
+
+        [DllImport("LibStHook.dll", CharSet = CharSet.Unicode)]
+        public static extern void SetFakeImagePath(string x);
     }
 }

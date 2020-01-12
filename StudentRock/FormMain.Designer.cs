@@ -30,10 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.textBoxStMainPID = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxStMainPath = new System.Windows.Forms.TextBox();
-            this.labelpStMainPath = new System.Windows.Forms.Label();
             this.checkBoxIsConnected = new System.Windows.Forms.CheckBox();
             this.groupBoxStatus = new System.Windows.Forms.GroupBox();
             this.timerCheck = new System.Windows.Forms.Timer(this.components);
@@ -48,41 +44,10 @@
             this.coreConfig = new System.Windows.Forms.GroupBox();
             this.labelVersion = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.openImage = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxStatus.SuspendLayout();
             this.coreConfig.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // textBoxStMainPID
-            // 
-            this.textBoxStMainPID.Location = new System.Drawing.Point(76, 86);
-            this.textBoxStMainPID.Name = "textBoxStMainPID";
-            this.textBoxStMainPID.Size = new System.Drawing.Size(130, 21);
-            this.textBoxStMainPID.TabIndex = 4;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "学生端 PID：";
-            // 
-            // textBoxStMainPath
-            // 
-            this.textBoxStMainPath.Location = new System.Drawing.Point(76, 40);
-            this.textBoxStMainPath.Name = "textBoxStMainPath";
-            this.textBoxStMainPath.Size = new System.Drawing.Size(130, 21);
-            this.textBoxStMainPath.TabIndex = 1;
-            // 
-            // labelpStMainPath
-            // 
-            this.labelpStMainPath.AutoSize = true;
-            this.labelpStMainPath.Location = new System.Drawing.Point(6, 46);
-            this.labelpStMainPath.Name = "labelpStMainPath";
-            this.labelpStMainPath.Size = new System.Drawing.Size(77, 12);
-            this.labelpStMainPath.TabIndex = 2;
-            this.labelpStMainPath.Text = "学生端路径：";
             // 
             // checkBoxIsConnected
             // 
@@ -101,14 +66,10 @@
             // 
             // groupBoxStatus
             // 
-            this.groupBoxStatus.Controls.Add(this.textBoxStMainPID);
-            this.groupBoxStatus.Controls.Add(this.label1);
-            this.groupBoxStatus.Controls.Add(this.textBoxStMainPath);
-            this.groupBoxStatus.Controls.Add(this.labelpStMainPath);
             this.groupBoxStatus.Controls.Add(this.checkBoxIsConnected);
             this.groupBoxStatus.Location = new System.Drawing.Point(11, 10);
             this.groupBoxStatus.Name = "groupBoxStatus";
-            this.groupBoxStatus.Size = new System.Drawing.Size(242, 121);
+            this.groupBoxStatus.Size = new System.Drawing.Size(242, 42);
             this.groupBoxStatus.TabIndex = 10;
             this.groupBoxStatus.TabStop = false;
             this.groupBoxStatus.Text = "状态";
@@ -134,9 +95,9 @@
             this.c_showConsole.AutoSize = true;
             this.c_showConsole.Location = new System.Drawing.Point(6, 88);
             this.c_showConsole.Name = "c_showConsole";
-            this.c_showConsole.Size = new System.Drawing.Size(96, 16);
+            this.c_showConsole.Size = new System.Drawing.Size(54, 16);
             this.c_showConsole.TabIndex = 5;
-            this.c_showConsole.Text = "显示调试窗口";
+            this.c_showConsole.Text = "debug";
             this.c_showConsole.UseVisualStyleBackColor = true;
             // 
             // c_noTopMostWindow
@@ -160,6 +121,7 @@
             this.c_exitStMain.TabIndex = 3;
             this.c_exitStMain.Text = "阻止学生端启动";
             this.c_exitStMain.UseVisualStyleBackColor = true;
+            this.c_exitStMain.CheckedChanged += new System.EventHandler(this.c_exitStMain_CheckedChanged);
             // 
             // c_enableTerminate
             // 
@@ -192,6 +154,7 @@
             this.c_fakeScreenshot.TabIndex = 0;
             this.c_fakeScreenshot.Text = "屏幕伪装";
             this.c_fakeScreenshot.UseVisualStyleBackColor = true;
+            this.c_fakeScreenshot.CheckedChanged += new System.EventHandler(this.c_fakeScreenshot_CheckedChanged);
             // 
             // buttonStart
             // 
@@ -211,7 +174,7 @@
             this.coreConfig.Controls.Add(this.c_enableTerminate);
             this.coreConfig.Controls.Add(this.c_unhookKeyboard);
             this.coreConfig.Controls.Add(this.c_fakeScreenshot);
-            this.coreConfig.Location = new System.Drawing.Point(11, 165);
+            this.coreConfig.Location = new System.Drawing.Point(11, 58);
             this.coreConfig.Name = "coreConfig";
             this.coreConfig.Size = new System.Drawing.Size(242, 114);
             this.coreConfig.TabIndex = 7;
@@ -236,6 +199,14 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
+            // openImage
+            // 
+            this.openImage.DefaultExt = "bmp";
+            this.openImage.Filter = "Bitmap 图像(*.bmp)|*.bmp|所有合适文件(*.bmp)|*.bmp";
+            this.openImage.FilterIndex = 2;
+            this.openImage.RestoreDirectory = true;
+            this.openImage.Title = "选择伪装的图像";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -259,10 +230,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox textBoxStMainPID;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxStMainPath;
-        private System.Windows.Forms.Label labelpStMainPath;
         private System.Windows.Forms.CheckBox checkBoxIsConnected;
         private System.Windows.Forms.GroupBox groupBoxStatus;
         private System.Windows.Forms.Timer timerCheck;
@@ -277,6 +244,7 @@
         private System.Windows.Forms.GroupBox coreConfig;
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.OpenFileDialog openImage;
     }
 }
 

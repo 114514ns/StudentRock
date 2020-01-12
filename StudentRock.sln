@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StudentRock", "StudentRock\StudentRock.csproj", "{EE5C48EE-5015-47E9-A704-C669B89044F0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0FED2A42-43EA-4404-9E61-CD802602306D} = {0FED2A42-43EA-4404-9E61-CD802602306D}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibStHook", "LibStHook\LibStHook.vcxproj", "{0FED2A42-43EA-4404-9E61-CD802602306D}"
 EndProject
@@ -37,6 +40,7 @@ Global
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Debug|x86.ActiveCfg = Debug|Win32
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Debug|x86.Build.0 = Debug|Win32
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Release|Any CPU.ActiveCfg = Release|Win32
+		{0FED2A42-43EA-4404-9E61-CD802602306D}.Release|Any CPU.Build.0 = Release|Win32
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Release|x64.ActiveCfg = Release|x64
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Release|x64.Build.0 = Release|x64
 		{0FED2A42-43EA-4404-9E61-CD802602306D}.Release|x86.ActiveCfg = Release|Win32

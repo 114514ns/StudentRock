@@ -1,6 +1,9 @@
 #include "pch.h"
+#include <GdiPlus.h>
 #include "DetourFunctions.h"
 #include "LibStHook.h"
+
+#pragma comment(lib, "gdiplus.lib")
 
 fnTDMasterInitHook TDMasterInitHook = NULL;
 fnTDMasterInitHook fpTDMasterInitHook = NULL;
@@ -38,19 +41,19 @@ BOOL WINAPI DetourSetWindowPos(HWND hWnd, HWND hWndInsertAfter, int  X, int  Y, 
 
 int WINAPI DetourGetDIBits(HDC hdc, HBITMAP hbm, UINT start, UINT cLines, LPVOID lpvBits, LPBITMAPINFO lpbmi, UINT usage)
 {
-	if (g_fakeScreenshot && lpvBits != NULL && cLines > 32) {
+	if (g_useFakeImage && lpvBits != NULL && cLines > 32) {
 		// cLines > 32: prevent cursor redraw
 		HBITMAP hbm = NULL;
-		if (OpenClipboard(NULL)) {
-			hbm = (HBITMAP)GetClipboardData(CF_BITMAP);
-			CloseClipboard();
-			int ret = NULL;
+		int ret = NULL;
+		if (wcslen(g_fakeImagePath)) {
+			Gdiplus::Bitmap bmp(g_fakeImagePath);
+			Gdiplus::Color bgColor;
+			bmp.GetHBITMAP(bgColor, &hbm);
 			ret = fpGetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
-			printf("[Info] read from clipboard: GetDIBits:%d cLines:%d\n", ret, cLines);
-			return ret;
+			printf("[Info] fake screen shot: hbm:0x%x GetDIBits:%d cLines:%d\n", hbm, ret, cLines);
 		}
 		printf("[Info] disallowed GetDIBits.\n");
-		return FALSE;
+		return ret;
 	}
 	printf("[Info] allowed GetDIBits.\n");
 	return fpGetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);

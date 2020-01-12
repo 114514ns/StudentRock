@@ -15,12 +15,11 @@ HHOOK g_hHook = NULL;
 BOOL g_enableTerminate = FALSE;
 BOOL g_unhookKeyboard = FALSE;
 BOOL g_exitStMain = FALSE;
-BOOL g_fakeScreenshot = FALSE;
 BOOL g_noTopMostWindow = FALSE;
-char g_StMainPath[MAX_PATH] = { 0 };
-DWORD g_StMainId = 0;
 BOOL g_isAlive = FALSE;
 BOOL g_showConsole = FALSE;
+BOOL g_useFakeImage = FALSE;
+WCHAR g_fakeImagePath[MAX_PATH] = { 0 };
 #pragma data_seg()
 #pragma comment(linker, "/SECTION:StHookdata,RWS")
 
@@ -82,9 +81,9 @@ BOOL SetStModulesProc()
 
 VOID ObtainBasicInformation()
 {
-	g_StMainId = GetCurrentProcessId();
-	GetModuleFileName(NULL, g_StMainPath, MAX_PATH);
-	printf("[Info] Detected StudentMain: ProcessId=%d Path=%s\n", g_StMainId, g_StMainPath);
+	char l_StMainPath[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, l_StMainPath, MAX_PATH);
+	printf("[Info] Detected StudentMain: ProcessId=%d Path=%s\n", GetCurrentProcessId(), l_StMainPath);
 }
 
 LRESULT GetMsgProc(
@@ -197,26 +196,10 @@ VOID SetExitStMain(BOOL x)
 	return;
 }
 
-VOID SetFakeScreenshot(BOOL x)
-{
-	g_fakeScreenshot = x;
-	return;
-}
-
 VOID SetNoTopMostWindow(BOOL x)
 {
 	g_noTopMostWindow = x;
 	return;
-}
-
-LPCSTR GetStMainPath()
-{
-	return g_StMainPath;
-}
-
-DWORD GetStMainId()
-{
-	return g_StMainId;
 }
 
 BOOL IsAlive()
@@ -231,5 +214,17 @@ BOOL IsAlive()
 VOID SetShowConsole(BOOL x)
 {
 	g_showConsole = x;
+	return;
+}
+
+VOID SetFakeImagePath(LPCWSTR x)
+{
+	wcscpy_s(g_fakeImagePath, x);
+	if (wcslen(x)) {
+		g_useFakeImage = TRUE;
+	}
+	else {
+		g_useFakeImage = FALSE;
+	}
 	return;
 }

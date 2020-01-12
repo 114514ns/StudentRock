@@ -15,6 +15,10 @@ namespace StudentRock
         {
             InitializeComponent();
             applySettings();
+            foreach(CheckBox c in coreConfig.Controls)
+            {
+                c.CheckedChanged += new System.EventHandler(checkBoxesStateChange);
+            }
         }
 
         private void applySettings()
@@ -22,8 +26,8 @@ namespace StudentRock
             if (c_enableTerminate.Checked) LibStHook.SetEnableTerminate(1);
             else LibStHook.SetEnableTerminate(0);
 
-            if (c_fakeScreenshot.Checked) LibStHook.SetFakeScreenshot(1);
-            else LibStHook.SetFakeScreenshot(0);
+            if (!c_fakeScreenshot.Checked)
+                LibStHook.SetFakeImagePath("");
 
             if (c_unhookKeyboard.Checked) LibStHook.SetUnhookKeyboard(1);
             else LibStHook.SetUnhookKeyboard(0);
@@ -36,6 +40,11 @@ namespace StudentRock
 
             if (c_showConsole.Checked) LibStHook.SetShowConsole(1);
             else LibStHook.SetShowConsole(0);
+        }
+
+        private void checkBoxesStateChange(object sender, EventArgs e)
+        {
+            applySettings();
         }
 
         private void CheckBoxIsConnected_CheckedChanged(object sender, EventArgs e)
@@ -54,6 +63,7 @@ namespace StudentRock
 
         private void ButtonStart_Click(object sender, EventArgs e)
         {
+            applySettings();
             LibStHook.SetGlobalHook();
         }
 
@@ -64,9 +74,6 @@ namespace StudentRock
 
         private void TimerCheck_Tick(object sender, EventArgs e)
         {
-            textBoxStMainPath.Text = LibStHook.GetStMainPath();
-            textBoxStMainPID.Text = LibStHook.GetStMainId().ToString();
-
             if (LibStHook.IsAlive() != 0) checkBoxIsConnected.Checked = true;
             else checkBoxIsConnected.Checked = false;
 
@@ -82,6 +89,29 @@ namespace StudentRock
             {
                 this.Show();
             }
+        }
+
+        private void c_fakeScreenshot_CheckedChanged(object sender, EventArgs e)
+        {
+            if(!c_fakeScreenshot.Checked)
+            {
+                LibStHook.SetFakeImagePath("");
+                return;
+            }
+
+            if(openImage.ShowDialog() == DialogResult.OK)
+            {
+                LibStHook.SetFakeImagePath(openImage.FileName);
+            } else
+            {
+                c_fakeScreenshot.Checked = false;
+            }
+        }
+
+        private void c_exitStMain_CheckedChanged(object sender, EventArgs e)
+        {
+            if (c_exitStMain.Checked) c_exitStMain.ForeColor = Color.Red;
+            else c_exitStMain.ForeColor = Color.Black;
         }
     }
 }
