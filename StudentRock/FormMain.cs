@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace StudentRock
@@ -40,6 +41,16 @@ namespace StudentRock
 
             if (c_showConsole.Checked) LibStHook.SetShowConsole(1);
             else LibStHook.SetShowConsole(0);
+        }
+
+        private Image getScreenImage()
+        {
+            Rectangle tScreenRect = new Rectangle(0, 0, Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Bitmap tSrcBmp = new Bitmap(tScreenRect.Width, tScreenRect.Height);
+            Graphics g = Graphics.FromImage(tSrcBmp);
+            g.CopyFromScreen(0, 0, 0, 0, tScreenRect.Size);
+            g.DrawImage(tSrcBmp, 0, 0, tScreenRect, GraphicsUnit.Pixel);
+            return tSrcBmp;
         }
 
         private void checkBoxesStateChange(object sender, EventArgs e)
@@ -112,6 +123,18 @@ namespace StudentRock
         {
             if (c_exitStMain.Checked) c_exitStMain.ForeColor = Color.Red;
             else c_exitStMain.ForeColor = Color.Black;
+        }
+
+        private void buttonSaveScreen_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Thread.Sleep(500);
+            Image i = getScreenImage();
+            this.Show();
+            if (saveImage.ShowDialog() == DialogResult.OK)
+            {
+                i.Save(saveImage.FileName);
+            }
         }
     }
 }

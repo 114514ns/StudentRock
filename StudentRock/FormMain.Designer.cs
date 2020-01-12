@@ -45,8 +45,13 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.openImage = new System.Windows.Forms.OpenFileDialog();
+            this.readme = new System.Windows.Forms.GroupBox();
+            this.l_readme = new System.Windows.Forms.Label();
+            this.buttonSaveScreen = new System.Windows.Forms.Button();
+            this.saveImage = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxStatus.SuspendLayout();
             this.coreConfig.SuspendLayout();
+            this.readme.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBoxIsConnected
@@ -82,7 +87,7 @@
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(178, 285);
+            this.buttonStop.Location = new System.Drawing.Point(178, 313);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(75, 23);
             this.buttonStop.TabIndex = 9;
@@ -158,7 +163,7 @@
             // 
             // buttonStart
             // 
-            this.buttonStart.Location = new System.Drawing.Point(11, 285);
+            this.buttonStart.Location = new System.Drawing.Point(12, 313);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(75, 23);
             this.buttonStart.TabIndex = 8;
@@ -186,7 +191,7 @@
             this.labelVersion.AutoSize = true;
             this.labelVersion.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVersion.ForeColor = System.Drawing.Color.LightSeaGreen;
-            this.labelVersion.Location = new System.Drawing.Point(182, 318);
+            this.labelVersion.Location = new System.Drawing.Point(183, 339);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(70, 14);
             this.labelVersion.TabIndex = 11;
@@ -207,11 +212,50 @@
             this.openImage.RestoreDirectory = true;
             this.openImage.Title = "选择伪装的图像";
             // 
+            // readme
+            // 
+            this.readme.Controls.Add(this.l_readme);
+            this.readme.Location = new System.Drawing.Point(11, 179);
+            this.readme.Name = "readme";
+            this.readme.Size = new System.Drawing.Size(241, 99);
+            this.readme.TabIndex = 12;
+            this.readme.TabStop = false;
+            this.readme.Text = "说明";
+            // 
+            // l_readme
+            // 
+            this.l_readme.AutoSize = true;
+            this.l_readme.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.l_readme.Location = new System.Drawing.Point(10, 17);
+            this.l_readme.Name = "l_readme";
+            this.l_readme.Size = new System.Drawing.Size(212, 68);
+            this.l_readme.TabIndex = 0;
+            this.l_readme.Text = "默认配置即可工作，只需点击“连接”\r\n单击任务栏中的图标可以隐藏\r\n保存屏幕后即可配置屏幕伪装\r\n保存屏幕时本软件界面不会出现";
+            // 
+            // buttonSaveScreen
+            // 
+            this.buttonSaveScreen.Location = new System.Drawing.Point(178, 284);
+            this.buttonSaveScreen.Name = "buttonSaveScreen";
+            this.buttonSaveScreen.Size = new System.Drawing.Size(75, 23);
+            this.buttonSaveScreen.TabIndex = 13;
+            this.buttonSaveScreen.Text = "保存屏幕";
+            this.buttonSaveScreen.UseVisualStyleBackColor = true;
+            this.buttonSaveScreen.Click += new System.EventHandler(this.buttonSaveScreen_Click);
+            // 
+            // saveImage
+            // 
+            this.saveImage.DefaultExt = "bmp";
+            this.saveImage.FileName = "屏幕截图";
+            this.saveImage.Filter = "Bitmap 图像(*.bmp)|*.bmp|所有合适文件(*.bmp)|*.bmp";
+            this.saveImage.Title = "保存屏幕截图";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 341);
+            this.ClientSize = new System.Drawing.Size(264, 362);
+            this.Controls.Add(this.buttonSaveScreen);
+            this.Controls.Add(this.readme);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.groupBoxStatus);
             this.Controls.Add(this.buttonStop);
@@ -224,6 +268,8 @@
             this.groupBoxStatus.PerformLayout();
             this.coreConfig.ResumeLayout(false);
             this.coreConfig.PerformLayout();
+            this.readme.ResumeLayout(false);
+            this.readme.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,6 +291,10 @@
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.OpenFileDialog openImage;
+        private System.Windows.Forms.GroupBox readme;
+        private System.Windows.Forms.Label l_readme;
+        private System.Windows.Forms.Button buttonSaveScreen;
+        private System.Windows.Forms.SaveFileDialog saveImage;
     }
 }
 
