@@ -67,5 +67,8 @@ namespace StudentRock
 
         [DllImport("LibStHook.dll", CharSet = CharSet.Unicode)]
         public static extern void SetFakeImagePath(string x);
+
+        [DllImport("LibStHook.dll")]
+        public static extern void SetNoBlackScreen(int x);
     }
 }

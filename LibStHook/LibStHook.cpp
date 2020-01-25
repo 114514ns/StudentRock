@@ -20,6 +20,7 @@ BOOL g_isAlive = FALSE;
 BOOL g_showConsole = FALSE;
 BOOL g_useFakeImage = FALSE;
 WCHAR g_fakeImagePath[MAX_PATH] = { 0 };
+BOOL g_noBlackScreen = FALSE;
 #pragma data_seg()
 #pragma comment(linker, "/SECTION:StHookdata,RWS")
 
@@ -114,6 +115,7 @@ end:
 
 BOOL SetGlobalHook()
 {
+	if(g_hHook) UnsetGlobalHook();
 	g_hHook = SetWindowsHookExA(WH_GETMESSAGE, (HOOKPROC)GetMsgProc, g_hDllModule, NULL); // SetWindowsHookExW won't work :(
 	if (NULL == g_hHook)
 	{
@@ -125,10 +127,6 @@ BOOL SetGlobalHook()
 
 BOOL UnsetGlobalHook()
 {
-	if (NULL == g_hHook)
-	{
-		return FALSE;
-	}
 	UnhookWindowsHookEx(g_hHook);
 	g_hHook = NULL;
 	return TRUE;
@@ -154,6 +152,11 @@ BOOL SetAPIHooks()
 	sts = MH_CreateHook(&SetWindowPos, &DetourSetWindowPos, (LPVOID*)& fpSetWindowPos);
 	if (sts != MH_OK) {
 		printf("[Error] cannot hook SetWindowPos: %s\n", MH_StatusToString(sts));
+		return FALSE;
+	}
+	sts = MH_CreateHook(&CreateWindowExW, &DetourCreateWindowExW, (LPVOID*)&fpCreateWindowExW);
+	if (sts != MH_OK) {
+		printf("[Error] cannot hook CreateWindowExW: %s\n", MH_StatusToString(sts));
 		return FALSE;
 	}
 	sts = MH_CreateHook(TDMasterInitHook, &DetourTDMasterInitHook, (LPVOID*)& fpTDMasterInitHook);
@@ -226,5 +229,11 @@ VOID SetFakeImagePath(LPCWSTR x)
 	else {
 		g_useFakeImage = FALSE;
 	}
+	return;
+}
+
+VOID SetNoBlackScreen(BOOL x)
+{
+	g_noBlackScreen = x;
 	return;
 }

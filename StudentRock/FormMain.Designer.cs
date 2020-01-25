@@ -49,6 +49,7 @@
             this.l_readme = new System.Windows.Forms.Label();
             this.buttonSaveScreen = new System.Windows.Forms.Button();
             this.saveImage = new System.Windows.Forms.SaveFileDialog();
+            this.c_noBlackScreen = new System.Windows.Forms.CheckBox();
             this.groupBoxStatus.SuspendLayout();
             this.coreConfig.SuspendLayout();
             this.readme.SuspendLayout();
@@ -173,6 +174,7 @@
             // 
             // coreConfig
             // 
+            this.coreConfig.Controls.Add(this.c_noBlackScreen);
             this.coreConfig.Controls.Add(this.c_showConsole);
             this.coreConfig.Controls.Add(this.c_noTopMostWindow);
             this.coreConfig.Controls.Add(this.c_exitStMain);
@@ -249,6 +251,16 @@
             this.saveImage.Filter = "Bitmap 图像(*.bmp)|*.bmp|所有合适文件(*.bmp)|*.bmp";
             this.saveImage.Title = "保存屏幕截图";
             // 
+            // c_noBlackScreen
+            // 
+            this.c_noBlackScreen.AutoSize = true;
+            this.c_noBlackScreen.Location = new System.Drawing.Point(126, 64);
+            this.c_noBlackScreen.Name = "c_noBlackScreen";
+            this.c_noBlackScreen.Size = new System.Drawing.Size(96, 16);
+            this.c_noBlackScreen.TabIndex = 6;
+            this.c_noBlackScreen.Text = "阻止黑屏肃静";
+            this.c_noBlackScreen.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -295,6 +307,7 @@
         private System.Windows.Forms.Label l_readme;
         private System.Windows.Forms.Button buttonSaveScreen;
         private System.Windows.Forms.SaveFileDialog saveImage;
+        private System.Windows.Forms.CheckBox c_noBlackScreen;
     }
 }
 

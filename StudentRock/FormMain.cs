@@ -41,6 +41,9 @@ namespace StudentRock
 
             if (c_showConsole.Checked) LibStHook.SetShowConsole(1);
             else LibStHook.SetShowConsole(0);
+
+            if (c_noBlackScreen.Checked) LibStHook.SetNoBlackScreen(1);
+            else LibStHook.SetNoBlackScreen(0);
         }
 
         private Image getScreenImage()

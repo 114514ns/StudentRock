@@ -17,6 +17,7 @@ extern BOOL g_exitStMain;
 extern BOOL g_noTopMostWindow;
 extern BOOL g_useFakeImage;
 extern WCHAR g_fakeImagePath[MAX_PATH];
+extern BOOL g_noBlackScreen;
 
 extern "C" {
 	LIBSTHOOK_API BOOL SetGlobalHook();
@@ -28,6 +29,7 @@ extern "C" {
 	LIBSTHOOK_API VOID SetShowConsole(BOOL x);
 	LIBSTHOOK_API BOOL IsAlive();
 	LIBSTHOOK_API VOID SetFakeImagePath(LPCWSTR x);
+	LIBSTHOOK_API VOID SetNoBlackScreen(BOOL x);
 }
 
 extern BOOL SetAPIHooks();

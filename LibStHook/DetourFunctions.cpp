@@ -12,6 +12,7 @@ fnGetDC fpGetDC = NULL;
 fnCreateDCW fpCreateDCW = NULL;
 fnSetWindowPos fpSetWindowPos = NULL;
 fnGetDIBits fpGetDIBits = NULL;
+fnCreateWindowExW fpCreateWindowExW = NULL;
 
 HDC WINAPI DetourGetDC(HWND hWnd)
 {
@@ -24,7 +25,7 @@ HDC WINAPI DetourCreateDCW(LPCWSTR pwszDriver, LPCWSTR pwszDevice, LPWSTR pszPor
 	return fpCreateDCW(pwszDriver, pwszDevice, pszPort, pdm);
 }
 
-BOOL WINAPI DetourSetWindowPos(HWND hWnd, HWND hWndInsertAfter, int  X, int  Y, int  cx, int  cy, UINT uFlags)
+BOOL WINAPI DetourSetWindowPos(HWND hWnd, HWND hWndInsertAfter, int X, int Y, int cx, int cy, UINT uFlags)
 {
 	if (g_noTopMostWindow && hWndInsertAfter == HWND_TOPMOST) {
 		if ((GetWindowLong(hWnd, GWL_STYLE) & WS_BORDER) == 0) {
@@ -57,6 +58,44 @@ int WINAPI DetourGetDIBits(HDC hdc, HBITMAP hbm, UINT start, UINT cLines, LPVOID
 	}
 	printf("[Info] allowed GetDIBits.\n");
 	return fpGetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
+}
+
+HWND WINAPI DetourCreateWindowExW(
+	DWORD     dwExStyle,
+	LPCWSTR   lpClassName,
+	LPCWSTR   lpWindowName,
+	DWORD     dwStyle,
+	int       X,
+	int       Y,
+	int       nWidth,
+	int       nHeight,
+	HWND      hWndParent,
+	HMENU     hMenu,
+	HINSTANCE hInstance,
+	LPVOID    lpParam
+)
+{
+	if (g_noBlackScreen) {
+		if (lpWindowName != NULL && wcscmp(lpWindowName, L"BlackScreen Window") == 0) {
+			printf("[Info] disallowed CreateWindowExW for BlackScreen Window.\n");
+			return 0;
+		}
+	}
+	printf("[Info] allowed CreateWindowExW.\n");
+	return fpCreateWindowExW(
+		dwExStyle,
+		lpClassName,
+		lpWindowName,
+		dwStyle,
+		X,
+		Y,
+		nWidth,
+		nHeight,
+		hWndParent,
+		hMenu,
+		hInstance,
+		lpParam
+	);
 }
 
 int DetourTDMasterInitHook(HWND hWnd, UINT msg, int a3)
