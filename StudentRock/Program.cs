@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Windows.Forms;
 
 using System.Runtime.InteropServices;
 using System.IO;
-using FSLib.App.SimpleUpdater;
+
 
 namespace StudentRock
 {
@@ -24,7 +24,6 @@ namespace StudentRock
                 MessageBox.Show("错误：依赖文件缺失！\n请运行 RockLoader 释放依赖。", "Error");
                 return;
             }
-            Updater.CheckUpdateSimple("http://f.17zuonie.org/StudentRock/{0}", "update_c.xml");
             Application.Run(new FormMain());
             LibStHook.UnsetGlobalHook();
         }

@@ -5,6 +5,7 @@
 #include "framework.h"
 #include "LibStHook.h"
 #include "DetourFunctions.h"
+#include "windows.h"
 #include "MinHook.h"
 
 typedef BOOL(*fnTDMasterDoneHook)();

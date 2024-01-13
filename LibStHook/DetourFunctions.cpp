@@ -51,9 +51,11 @@ int WINAPI DetourGetDIBits(HDC hdc, HBITMAP hbm, UINT start, UINT cLines, LPVOID
 			Gdiplus::Color bgColor;
 			bmp.GetHBITMAP(bgColor, &hbm);
 			ret = fpGetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage);
-			printf("[Info] fake screen shot: hbm:0x%x GetDIBits:%d cLines:%d\n", hbm, ret, cLines);
+			//printf("[Info] fake screen shot: hbm:0x%x GetDIBits:%d cLines:%d\n", hbm, ret, cLines);
+			DeleteObject(hbm);
 		}
 		printf("[Info] disallowed GetDIBits.\n");
+		
 		return ret;
 	}
 	printf("[Info] allowed GetDIBits.\n");
