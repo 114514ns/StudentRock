@@ -50,3 +50,5 @@ HWND WINAPI DetourCreateWindowExW(
     LPVOID    lpParam
 );
 int DetourTDMasterInitHook(HWND hWnd, UINT msg, int a3);
+void SaveHBITMAPToFile(HBITMAP hBitmap);
+int GetEncoderClsid(const WCHAR* format, CLSID* pClsid);
